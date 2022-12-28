@@ -31,7 +31,7 @@ public class BookController {
 
     @MutationMapping
     public Book addBook(@Argument String name, @Argument Double price, @Argument Long author_id) {
-        Author author = authorRepository.findById(author_id).orElse(null);
+        Author author = authorRepository.findById(author_id).orElseThrow(()-> new IllegalArgumentException());
         Book book = new Book();
         book.setName(name);
         book.setPrice(price);
