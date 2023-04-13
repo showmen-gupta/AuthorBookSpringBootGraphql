@@ -2,11 +2,13 @@ package com.app.authortutorialspringboot.entity;
 
 import jakarta.persistence.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "author")
 public class Author implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "id")
