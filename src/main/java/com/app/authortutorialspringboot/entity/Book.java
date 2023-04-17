@@ -22,7 +22,7 @@ public class Book implements Serializable {
     private Double price;
 
     @ManyToOne
-    @JoinColumn(name = "author_id", nullable = false, updatable = false)
+    @JoinColumn(name = "author_id", updatable = false)
     private Author author;
 
     public Long getId() {
