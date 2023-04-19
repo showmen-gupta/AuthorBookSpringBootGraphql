@@ -5,7 +5,6 @@ import com.app.authortutorialspringboot.repository.AuthorRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -66,7 +65,7 @@ public class AuthorControllerTest {
     }
 
     @Test
-    @DisplayName("It should update a author")
+    @DisplayName("It should delete a author")
     public void testDeleteAuthor() {
         when(authorRepository.save(any())).thenReturn(populateAuthor("Pep"));
         var IsDeleted = authorController.deleteAuthor(1L);
