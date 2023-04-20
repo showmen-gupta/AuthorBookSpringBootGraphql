@@ -40,12 +40,13 @@ public class BookController {
     }
 
     @MutationMapping
-    public Book updateBook(@Argument Long id, @Argument String name, @Argument Double price) {
+    public Book updateBook(@Argument Long id, @Argument String name, @Argument Double price, @Argument Long author_id) {
+        Author author = authorRepository.findById(author_id).orElseThrow(IllegalArgumentException::new);
         Book book = new Book();
         book.setId(id);
         book.setName(name);
         book.setPrice(price);
-
+        book.setAuthor(author);
         return bookRepository.save(book);
     }
 

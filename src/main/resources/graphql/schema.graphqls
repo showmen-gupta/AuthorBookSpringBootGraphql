@@ -10,7 +10,7 @@ type Mutation {
     updateAuthor(id: ID!, name: String!): Author!
     deleteAuthor(id: ID!): Boolean
     addBook(name: String!, price: Float!, author_id: ID!): Book!
-    updateBook(id: ID!, name: String!,price: Float!): Book!
+    updateBook(id: ID!, name: String!,price: Float!, author_id: ID!): Book!
     deleteBook(id: ID!): Boolean
 }
 

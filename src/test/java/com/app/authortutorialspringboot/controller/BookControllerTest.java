@@ -36,10 +36,10 @@ public class BookControllerTest {
     @Test
     @DisplayName("It should add books with author")
     public void testAddBooks() {
-        when(bookRepository.save(any())).thenReturn(populateBook());
+        when(bookRepository.save(any())).thenReturn(populateBook("Test Book Add", "Pep"));
         when(authorRepository.findById(any())).thenReturn(Optional.of(populateAuthor("Pep")));
-        var book = bookController.addBook("Test Book 1", 200.0, 1L);
-        assertEquals("Test Book 1", book.getName());
+        var book = bookController.addBook("Test Book Add", 200.0, 1L);
+        assertEquals("Test Book Add", book.getName());
         assertEquals(200.0, book.getPrice());
         assertEquals("Pep", book.getAuthor().getName());
     }
@@ -59,7 +59,7 @@ public class BookControllerTest {
     @Test
     @DisplayName("It should return single book")
     public void testGetSingleBook() {
-        when(bookRepository.findById(any())).thenReturn(Optional.of(populateBook()));
+        when(bookRepository.findById(any())).thenReturn(Optional.of(populateBook("Test Book 1", "Pep")));
         var book = bookController.book(1L);
         assertEquals("Test Book 1", book.getName());
         assertEquals(200.0, book.getPrice());
@@ -69,27 +69,28 @@ public class BookControllerTest {
     @Test
     @DisplayName("It should update a book")
     public void testUpdateBook() {
-        when(bookRepository.save(any())).thenReturn(populateBook());
-        var book = bookController.updateBook(1L, "Test Book 1", 200.0);
-        assertEquals("Test Book 1", book.getName());
+        when(authorRepository.findById(1L)).thenReturn(Optional.of(populateAuthor("Pope")));
+        when(bookRepository.save(any())).thenReturn(populateBook("Test Book Update", "Pope"));
+        var book = bookController.updateBook(1L, "Test Book 1", 200.0, 1L);
+        assertEquals("Test Book Update", book.getName());
         assertEquals(200.0, book.getPrice());
-        assertEquals("Pep", book.getAuthor().getName());
+        assertEquals("Pope", book.getAuthor().getName());
     }
 
     @Test
     @DisplayName("It should delete a book")
     public void testDeleteBook() {
-        when(bookRepository.save(any())).thenReturn(populateBook());
+        when(bookRepository.save(any())).thenReturn(populateBook("Test Book Update", "Pep"));
         var IsDeleted = bookController.deleteBook(1L);
         assertTrue(IsDeleted);
     }
 
-    private Book populateBook() {
+    private Book populateBook(String bookName, String authorName) {
         Book book = new Book();
         book.setId(1L);
-        book.setName("Test Book 1");
+        book.setName(bookName);
         book.setPrice(200.0);
-        book.setAuthor(populateAuthor("Pep"));
+        book.setAuthor(populateAuthor(authorName));
         return book;
     }
 
